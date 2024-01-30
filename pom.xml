@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tmax</groupId>
-    <artifactId>hyperauth-spi-18</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>hyperauth-spi</artifactId>
+    <version>18.0.1</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
