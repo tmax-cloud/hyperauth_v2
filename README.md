@@ -89,7 +89,7 @@
 * 목적 : `HyperAuth Realm 설정 파일 업로드`
   * Console 접속 후, Realm Settings > 우측 상단 drop-down 메뉴 > Partial import 선택
   * script/tmax-realm-import.json 파일 업로드
-    ![realm-import.png](img.png)  
+    ![realm-import.png](script/img.png)  
   * Import 후 tmax realm 및 Clients, Groups 등이 생성되었는지 확인
 
 ### Step 6. Client 등록
