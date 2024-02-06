@@ -59,7 +59,7 @@ spec:
       containers:
         - name: hyperauth
           image: hyperregistry.tmaxcloud.org/hyperauth/hyperauth-18:b0.0.0.6
-          args: ["start --auto-build"]
+          args: ["start"]
           env:
             - name: KEYCLOAK_ADMIN
               value: "admin"
@@ -70,14 +70,14 @@ spec:
             - name: KC_DB
               value: "postgres"
             - name: KC_DB_USERNAME
-                valueFrom:
+            valueFrom:
                   secretKeyRef:
                     name: passwords
                     key: DB_PASSWORD
             - name: KC_DB_PASSWORD
               value: "keycloak"
             - name: KC_DB_URL
-              value: "jdbc:postgresql://192.168.9.194:32121/keycloak"
+              value: "jdbc:postgresql://192.168.9.194:31226/keycloak"
             - name: KC_LOG_LEVEL
               value: "INFO"
               # Below is for External-oidc-provider or use mTLS. (for initech)
@@ -95,16 +95,13 @@ spec:
             - name: KC_HTTPS_KEY_STORE_FILE
               value: "/opt/keycloak/ssl/keystore.p12"
             - name: KC_HTTPS_KEY_STORE_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: external-keystore-password
-                    key: password
+              value: "tmax@23"
             - name: EXTERNAL_OIDC_PROVIDER_AUTH_URL
-              value: "https://tmax.initech.com/externalauth"
+              value: "https://tmax.sso.initech.com/externalauth"
             - name: EXTERNAL_OIDC_PROVIDER_TOKEN_URL
-              value: "https://tmax.initech.com/token"
+              value: "https://tmax.sso.initech.com/token"
             - name: EXTERNAL_OIDC_PROVIDER_PROFILE_URL
-              value: "https://tmax.initech.com/user"
+              value: "https://tmax.sso.initech.com/user"
           ports:
             - name: http
               containerPort: 8080
