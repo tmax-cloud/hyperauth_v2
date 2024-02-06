@@ -1,26 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: hyperauth
-  namespace: hyperauth
-  labels:
-    app: keycloak
-  annotations:
-    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
-    traefik.ingress.kubernetes.io/service.sticky.cookie.name: hyperauth
-    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
-spec:
-  ports:
-    - name: http
-      port: 8080
-      targetPort: 8080
-    - name: https
-      port: 443
-      targetPort: 8443
-  selector:
-    app: hyperauth
-  type: LoadBalancer   # ClusterIP or LoadBalancer or NodePort
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -58,7 +35,7 @@ spec:
                 key: keystore.p12
       containers:
         - name: hyperauth
-          image: hyperregistry.tmaxcloud.org/hyperauth/hyperauth-18:b0.0.0.6
+          image: hyperregistry.tmaxcloud.org/hyperauth/hyperauth:b2.0.0.0
           args: ["start"]
           env:
             - name: KEYCLOAK_ADMIN
@@ -70,10 +47,10 @@ spec:
             - name: KC_DB
               value: "postgres"
             - name: KC_DB_USERNAME
-            valueFrom:
-                  secretKeyRef:
-                    name: passwords
-                    key: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: passwords
+                  key: DB_PASSWORD
             - name: KC_DB_PASSWORD
               value: "keycloak"
             - name: KC_DB_URL
@@ -88,10 +65,10 @@ spec:
             - name: KC_SPI_TRUSTSTORE_FILE_TYPE
               value: "PKCS12"
             - name: KC_SPI_TRUSTSTORE_FILE_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: external-keystore-password
-                    key: password
+              valueFrom:
+                secretKeyRef:
+                  name: external-truststore-password
+                  key: password
             - name: KC_HTTPS_KEY_STORE_FILE
               value: "/opt/keycloak/ssl/keystore.p12"
             - name: KC_HTTPS_KEY_STORE_PASSWORD

@@ -44,6 +44,34 @@
   "quickLoginCheckMilliSeconds": 1000,
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
+  "users": [
+    {
+      "id" : "36635ae7-fa27-4399-842a-e044f1a4a6a4",
+      "username" : "hc-admin@tmax.co.kr",
+      "enabled" : true,
+      "totp" : false,
+      "emailVerified" : true,
+      "email" : "hc-admin@tmax.co.kr",
+      "attributes" : {
+        "lastPasswordUpdateTime" : [ "1642742685003" ]
+      },
+      "credentials" : [ {
+        "id" : "1455bc09-78b7-461f-8deb-b78810c3fc78",
+        "type" : "password",
+        "createdDate" : 1642742684995,
+        "secretData" : "{\"value\":\"a4a8RxdwjCK/c/XMebrs7vxbbrtfbyoPi7vhIJq9lPTYBytNiEY02QRXZ0OAKP0tcVcAmfNRgQkNdqRmD9QZlg==\",\"salt\":\"Z1bYMhjZiuUekrX5MZr1Gg==\"}",
+        "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\"}"
+      } ],
+      "disableableCredentialTypes" : [ ],
+      "requiredActions" : [ ],
+      "clientRoles" : {
+        "account" : [ "manage-account", "view-profile" ]
+      },
+      "clientConsents" : [ ],
+      "notBefore" : 0,
+      "groups" : [ "/hypercloud5", "/argocd-admin" ]
+    }
+  ],
   "roles": {
     "realm": [
       {
@@ -348,7 +376,6 @@
           "attributes": {}
         }
       ],
-      "gitlab2": [],
       "grafana": [],
       "hyperregistry": [],
       "security-admin-console": [],

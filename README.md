@@ -82,14 +82,14 @@
     * `kubectl get svc hyperauth -n hyperauth` 명령어로 IP 확인
     * 계정 : admin/admin
 * 비고 :
-  * K8s admin 기본 계정 정보 : hc-admin@tmax.co.kr/admin
+  * K8s admin 기본 계정 정보 : hc-admin@tmax.co.kr/Tmaxadmin1!
   * HyperAuth User 메뉴에서 비밀번호는 변경 가능, ID를 위해서는 clusterrole도 변경 필요
 
 ### Step 5. 초기 설정 파일 업로드
 * 목적 : `HyperAuth Realm 설정 파일 업로드`
-  * Console 접속 후, Realm Settings > 우측 상단 drop-down 메뉴 > Partial import 선택
+  * Console 접속 후, 좌측 상단 realm dropbox > Create Realm
   * script/tmax-realm-import.json 파일 업로드
-    ![realm-import.png](script/img.png)  
+    ![img.png](script/img.png)
   * Import 후 tmax realm 및 Clients, Groups 등이 생성되었는지 확인
 
 ### Step 6. Client 등록
