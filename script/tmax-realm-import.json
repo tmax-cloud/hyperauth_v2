@@ -726,7 +726,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "Uton8SYUTjnNO2UEKPZbv36DDz5nozpw",
+      "secret": "tmax_client_secret",
       "redirectUris": [
         "*"
       ],
@@ -1100,7 +1100,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "bozxzHTAJBEMnXepm4I8pwvANn6osRHq",
+      "secret": "tmax_client_secret",
       "redirectUris": [
         "*"
       ],
@@ -1418,6 +1418,7 @@
           "config": {
             "full.path": "false",
             "id.token.claim": "true",
+            "claim.name": "groups",
             "access.token.claim": "true",
             "userinfo.token.claim": "true"
           }
