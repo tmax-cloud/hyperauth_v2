@@ -850,7 +850,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "tmax_client_secret",
+      "secret": "5irtlAssFU8i2iwu0q3KI3hBLbnMJAC4",
       "redirectUris": [
         "*"
       ],
@@ -905,6 +905,7 @@
         "roles",
         "profile",
         "email",
+        "openid",
         "group"
       ],
       "optionalClientScopes": [
@@ -1286,6 +1287,18 @@
     }
   ],
   "clientScopes": [
+    {
+      "id": "13670165-d11a-443c-a6c1-03cfe0122726",
+      "name": "openid",
+      "description": "",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "gui.order": "",
+        "consent.screen.text": ""
+      }
+    },
     {
       "id": "53ac0dfd-7ac5-42ac-964c-12017b815489",
       "name": "kibana",
