@@ -66,19 +66,19 @@ public class InitechIdentityProvider extends AbstractOAuth2IdentityProvider impl
 
         if(profile.hasNonNull("email")){
             String email = profile.get("email").asText();
-            logger.info("initech email : " + email);
+            logger.info("shinhan life email : " + email);
             user.setEmail(email);
         }
 
         if(profile.hasNonNull("firstName")){
             String firstName = profile.get("firstName").asText();
-            logger.info("initech firstName : " + firstName);
+            logger.info("shinhan life firstName : " + firstName);
             user.setFirstName(firstName);
         }
 
         if(profile.hasNonNull("lastName")){
             String lastName = profile.get("lastName").asText();
-            logger.info("initech lastName : " + lastName);
+            logger.info("shinhan life lastName : " + lastName);
             user.setLastName(lastName);
         }
         //If needed, get email from external provider and set on user (should external provider support email return)
@@ -98,7 +98,7 @@ public class InitechIdentityProvider extends AbstractOAuth2IdentityProvider impl
             return user;
         } catch (Exception e) {
             log.error("Error Occurs!!", e);
-            throw new IdentityBrokerException("Could not obtain user profile from initech.", e);
+            throw new IdentityBrokerException("Could not obtain user profile from shinhan life.", e);
         }
     }
 
