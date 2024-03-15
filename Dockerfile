@@ -8,7 +8,7 @@ ADD script/keycloak.conf /opt/keycloak/conf/keycloak.conf
 # 2. add theme
 #ADD themes/base /opt/keycloak/themes/base
 #ADD themes/keycloak /opt/keycloak/themes/keycloak
-#ADD themes/keycloak.v2 /opt/keycloak/themes/keycloak.v2
+ADD themes/shinhan-life /opt/keycloak/themes/shinhan-life
 
 # 3. add hyperauth-spi.jar (SPI)
 ADD target/hyperauth-2.0.0.jar /opt/keycloak/providers/hyperauth-2.0.0.jar
