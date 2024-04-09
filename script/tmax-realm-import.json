@@ -1083,7 +1083,8 @@
         "roles",
         "profile",
         "email",
-        "group"
+        "group",
+        "sa-token"
       ],
       "optionalClientScopes": [
         "address",
@@ -1919,6 +1920,36 @@
           }
         }
       ]
+    },
+    {
+      "id": "781f91ad-0d8a-4b49-b101-b4c567b73f19",
+      "name": "sa-token",
+      "description": "sa-token",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "gui.order": "",
+        "consent.screen.text": ""
+      },
+      "protocolMappers": [
+        {
+          "id": "62b180d6-afa8-4eb5-a970-9258914b8d49",
+          "name": "sa-token",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "sa-token",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "sa-token",
+            "jsonType.label": "String"
+          }
+        }
+      ]
     }
   ],
   "defaultDefaultClientScopes": [
@@ -1928,7 +1959,8 @@
     "roles",
     "web-origins",
     "acr",
-    "group"
+    "group",
+    "sa-token"
   ],
   "defaultOptionalClientScopes": [
     "offline_access",
@@ -1959,9 +1991,9 @@
   "adminEventsDetailsEnabled": false,
   "identityProviders": [
     {
-      "alias": "initech",
+      "alias": "shinhan-life",
       "internalId": "01b2b69e-a670-4544-a424-000691676d7e",
-      "providerId": "initech",
+      "providerId": "shinhan-life",
       "enabled": true,
       "updateProfileFirstLoginMode": "on",
       "trustEmail": false,
