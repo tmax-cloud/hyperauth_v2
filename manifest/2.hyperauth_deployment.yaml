@@ -33,10 +33,16 @@ spec:
             items:
               - path: keystore.p12
                 key: keystore.p12
+        - name: import-config
+          configMap:
+            name: tmax-import-realm-config
+            items:
+              - key: "tmax-realm.json"
+                path: "tmax-realm.json"
       containers:
         - name: hyperauth
           image: hyperregistry.tmaxcloud.org/hyperauth/hyperauth:b2.0.0.0
-          args: ["start"]
+          args: ["start","--import-realm"]
           env:
             - name: KEYCLOAK_ADMIN
               value: "admin"
@@ -100,3 +106,5 @@ spec:
             - name: import-keystore
               mountPath: /opt/keycloak/ssl/keystore.p12
               subPath: keystore.p12
+            - name: import-config
+              mountPath: /opt/keycloak/data/import

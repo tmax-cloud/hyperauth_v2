@@ -20,6 +20,7 @@ ADD libs/keycloak-model-jpa-23.0.6.jar /opt/keycloak/lib/lib/main/org.keycloak.k
 
 # 5. for mTLS (SSL)
 RUN mkdir /opt/keycloak/ssl
+RUN mkdir /opt/keycloak/data/import
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
 
