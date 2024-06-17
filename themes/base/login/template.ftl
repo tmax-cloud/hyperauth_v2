@@ -14,6 +14,11 @@
     </#if>
     <title>${msg("loginTitle",(realm.displayName!''))}</title>
     <link rel="icon" href="${url.resourcesPath}/img/favicon.ico" />
+    <style>
+        .overflow {
+            overflow: auto;
+        }
+    </style>
     <#if properties.stylesCommon?has_content>
         <#list properties.stylesCommon?split(' ') as style>
             <link href="${url.resourcesCommonPath}/${style}" rel="stylesheet" />
@@ -42,7 +47,7 @@
         <div id="kc-header-wrapper"
              class="${properties.kcHeaderWrapperClass!}">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</div>
     </div>
-    <div class="${properties.kcFormCardClass!}">
+    <div class="${properties.kcFormCardClass!} overflow">
         <header class="${properties.kcFormHeaderClass!}">
             <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
                 <div class="${properties.kcLocaleMainClass!}" id="kc-locale">

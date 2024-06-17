@@ -2,11 +2,13 @@ from quay.io/keycloak/keycloak:23.0.6
 
 LABEL maintainer="seongmin_lee2@tmax.co.kr"
 
+USER root
+
 # 1. change keycloak.conf
 ADD script/keycloak.conf /opt/keycloak/conf/keycloak.conf
 
 # 2. add theme
-#ADD themes/base /opt/keycloak/themes/base
+ADD themes/base /opt/keycloak/themes/base
 #ADD themes/keycloak /opt/keycloak/themes/keycloak
 ADD themes/shinhan-life /opt/keycloak/themes/shinhan-life
 
