@@ -3,9 +3,10 @@ node {
     def gitHyperAuthAddress = "${gitHubBaseAddress}/tmax-cloud/hyperauth_v2.git"
     def buildDir = "/var/lib/jenkins/workspace/hyperauth_v2"
     def scriptHome = "${buildDir}/script"
+    def prev_version = "/var/lib/jenkins/workspace/hyperauth_utils/prev_version.txt"
     def keycloakBase = "${params.keycloakBaseVersion}"
     def version = "${params.majorVersion}.${params.minorVersion}.${params.tinyVersion}.${params.hotfixVersion}"
-    def preVersion = "${params.preVersion}"
+    def preVersion = sh(script: "cat ${prev_version}", returnStdout: true).trim()
     def imageTag = "b${version}"
     def githubUserToken = "${params.githubUserToken}"
 
@@ -77,6 +78,8 @@ node {
     }
 
     stage('Clear repo') {
+
+        sh "echo ${version} > ${prev_version}"
         sh "sudo rm -rf *"
     }
 
