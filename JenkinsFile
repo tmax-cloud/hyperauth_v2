@@ -1,0 +1,86 @@
+node {
+    def gitHubBaseAddress = "github.com"
+    def gitHyperAuthAddress = "${gitHubBaseAddress}/tmax-cloud/hyperauth_v2.git"
+    def buildDir = "/var/lib/jenkins/workspace/hyperauth_v2"
+    def scriptHome = "${buildDir}/script"
+    def keycloakBase = "${params.keycloakBaseVersion}"
+    def version = "${params.majorVersion}.${params.minorVersion}.${params.tinyVersion}.${params.hotfixVersion}"
+    def preVersion = "${params.preVersion}"
+    def imageTag = "b${version}"
+    def githubUserToken = "${params.githubUserToken}"
+
+    stage('Git pull') {
+        git branch: "${params.buildBranch}",
+                credentialsId: '2smin',
+                url: "http://${gitHyperAuthAddress}"
+
+        sh "git checkout ${params.buildBranch}"
+        sh "git fetch --all"
+        sh "git reset --hard origin/${params.buildBranch}"
+        sh "git pull origin ${params.buildBranch}"
+
+
+    }
+
+    stage('Maven build') {
+        withMaven(
+                maven: 'M353',
+                mavenSettingsConfig: 'd8df29f7-3dc7-4506-b839-e2474e4fc051',
+                jdk: 'jdk-17')
+                {
+                    sh "mvn clean -f pom.xml"
+                    sh "mvn install -f pom.xml"
+                }
+    }
+
+    stage('Image build & push') {
+        if (type == 'distribution') {
+
+            sh "sudo docker login hyperregistry.tmaxcloud.org -u admin -p admin"
+            sh "sudo docker build --tag hyperregistry.tmaxcloud.org/hyperauth/hyperauth:${imageTag} --build-arg HYPERAUTH_VERSION=${imageTag} ."
+            sh "sudo docker tag hyperregistry.tmaxcloud.org/hyperauth/hyperauth:${imageTag} hyperregistry.tmaxcloud.org/hyperauth/hyperauth:latest"
+            sh "sudo docker push hyperregistry.tmaxcloud.org/hyperauth/hyperauth:${imageTag}"
+            sh "sudo docker push hyperregistry.tmaxcloud.org/hyperauth/hyperauth:latest"
+            sh "sudo docker rmi hyperregistry.tmaxcloud.org/hyperauth/hyperauth:${imageTag}"
+        } else if (type == 'test') {
+            sh "sudo docker build --tag 192.168.9.12:5000/hyperauth-server:b${testVersion} --build-arg HYPERAUTH_VERSION=b${testVersion} ."
+            sh "sudo docker push 192.168.9.12:5000/hyperauth-server:b${testVersion}"
+            sh "sudo docker rmi 192.168.9.12:5000/hyperauth-server:b${testVersion}"
+
+        }
+    }
+
+    if (type == 'distribution') {
+
+        stage('Make change log') {
+            sh "sudo sh ${scriptHome}/changelog_writer.sh ${version} ${preVersion} ${keycloakBase}"
+        }
+
+        stage('Git push') {
+
+            sh "git checkout ${params.buildBranch}"
+            sh "git add -A"
+
+            sh "git commit -m '[Distribution] Hyper Auth Server- ${imageTag}'"
+            sh "git tag b${version}"
+
+            sh "git remote set-url origin https://${githubUserToken}@github.com/tmax-cloud/hyperauth_v2.git"
+
+            sh "sudo git push -u origin +${params.buildBranch}"
+            sh "sudo git push origin b${version}"
+
+            sh "git fetch --all"
+            sh "git reset --hard origin/${params.buildBranch}"
+            sh "git pull origin ${params.buildBranch}"
+
+        }
+    }
+
+    stage('Clear repo') {
+        sh "sudo rm -rf *"
+    }
+
+}
+
+
+
